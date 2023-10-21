@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/screens/home_screen.dart';
-import 'package:foodation/screens/login_screen.dart';
-import 'package:foodation/screens/regis_screen.dart';
+import 'package:foodation/screens/info_screen.dart';
+import 'package:foodation/screens/masak_screen.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -11,33 +12,48 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    HomeScreen(),
-    LoginScreen(),
-    RegisScreen(),
-  ];
-  void onBarTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onBarTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.soup_kitchen_rounded), label: 'Cook'),
-          BottomNavigationBarItem(icon: Icon(Icons.info), label: 'Information'),
+      bottomNavigationBar: GNav(
+        onTabChange: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        activeColor: const Color(0xffC21010),
+        gap: 8,
+        tabs: const [
+          GButton(
+            icon: Icons.home_filled,
+            text: 'Beranda',
+          ),
+          GButton(
+            icon: Icons.soup_kitchen_rounded,
+            text: 'Masak',
+          ),
+          GButton(
+            icon: Icons.info,
+            text: 'Search',
+          ),
         ],
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xffC21010),
       ),
+      body: <Widget>[
+        Container(
+          alignment: Alignment.center,
+          child: const HomeScreen(),
+        ),
+        Container(
+          alignment: Alignment.center,
+          child: const MasakScreen(),
+        ),
+        Container(
+          alignment: Alignment.center,
+          child: const InfoScreen(),
+        ),
+      ][currentPageIndex],
     );
   }
 }

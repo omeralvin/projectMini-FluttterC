@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodation/screens/home_screen.dart';
 import 'package:foodation/screens/regis_screen.dart';
+import 'package:foodation/widget/btm_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const BottomNavigation(),
                       ),
                     );
                   },
