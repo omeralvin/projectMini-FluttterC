@@ -75,7 +75,7 @@ class RegisScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    backgroundColor: const Color(0xffC21010),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -102,7 +102,7 @@ class RegisScreen extends StatelessWidget {
                   const Text("Sudah punya akun?"),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.red,
+                      foregroundColor: const Color(0xffC21010),
                     ),
                     onPressed: () {
                       Navigator.push(

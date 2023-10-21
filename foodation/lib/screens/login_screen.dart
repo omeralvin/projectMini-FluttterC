@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    backgroundColor: const Color(0xffC21010),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                   const Text("Belum punya akun?"),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.red,
+                      foregroundColor: const Color(0xffC21010),
                     ),
                     onPressed: () {
                       Navigator.push(
