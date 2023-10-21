@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodation/screens/home_screen.dart';
-import 'package:foodation/screens/regis_screen.dart';
+import 'package:foodation/screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisScreen extends StatelessWidget {
+  const RegisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +37,19 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 250,
-                child: Image.asset('assets/images/login.png'),
+                child: Image.asset('assets/images/regis.png'),
               ),
               const SizedBox(height: 40),
+              TextField(
+                controller: userController,
+                decoration: InputDecoration(
+                  labelText: 'Nama',
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  focusedBorder: focusBorder(),
+                ),
+              ),
+              const SizedBox(height: 20.0),
               TextField(
                 controller: userController,
                 decoration: InputDecoration(
@@ -75,12 +84,12 @@ class LoginScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const LoginScreen(),
                       ),
                     );
                   },
                   child: Text(
-                    "Masuk",
+                    "Daftar",
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -90,7 +99,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Text("Belum punya akun?"),
+                  const Text("Sudah punya akun?"),
                   TextButton(
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.red,
@@ -99,11 +108,11 @@ class LoginScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegisScreen(),
+                          builder: (context) => const LoginScreen(),
                         ),
                       );
                     },
-                    child: const Text("Daftar"),
+                    child: const Text("Masuk"),
                   ),
                 ],
               )
