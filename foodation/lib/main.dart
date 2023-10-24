@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodation/screens/home_view_screen.dart';
+import 'package:provider/provider.dart';
 import 'screens/login_screen.dart';
 
 void main() {
@@ -10,10 +12,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: LoginScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => FoodItem(),
+        )
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: LoginScreen(),
+        ),
       ),
     );
   }

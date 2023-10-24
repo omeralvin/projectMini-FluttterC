@@ -31,7 +31,7 @@ class _MasakScreenState extends State<MasakScreen> {
               Container(
                 height: 400,
                 decoration: const BoxDecoration(
-                  color: const Color(0XffFFF1F4),
+                  color: Color(0XffFFF1F4),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),
