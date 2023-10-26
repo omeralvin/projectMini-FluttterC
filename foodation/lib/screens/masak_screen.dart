@@ -23,6 +23,7 @@ class _MasakScreenState extends State<MasakScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController ingredientsController = TextEditingController();
     return Scaffold(
       body: ListView(
         children: [
@@ -52,9 +53,10 @@ class _MasakScreenState extends State<MasakScreen> {
                     ),
                     const SizedBox(height: 20.0),
                     TextField(
-                      // controller: userController,
+                      controller: ingredientsController,
                       decoration: InputDecoration(
-                        hintText: 'Bahan masakan',
+                        labelText: 'Bahan masakan',
+                        hintText: 'tomat,brokoli,...',
                         border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(15))),
@@ -66,35 +68,35 @@ class _MasakScreenState extends State<MasakScreen> {
               )
             ],
           ),
-          Text(
-            "Masak apa hari ini ?",
-            style:
-                GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 26),
-          ),
-          const SizedBox(height: 20.0),
-          const TextField(
-            // controller: userController,
-            decoration: InputDecoration(
-              hintText: 'Bahan masakan',
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          Center(
-            child: CircleAvatar(
-              backgroundColor: const Color(0xffC21010),
-              child: IconButton(
-                color: Colors.white,
-                onPressed: () {
-                  setState(() {
-                    textController.text = "Teks ${++textCount}";
-                  });
-                },
-                icon: const Icon(Icons.add),
-              ),
-            ),
-          )
+          // Text(
+          //   "Masak apa hari ini ?",
+          //   style:
+          //       GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 26),
+          // ),
+          // const SizedBox(height: 20.0),
+          // const TextField(
+          //   // controller: userController,
+          //   decoration: InputDecoration(
+          //     hintText: 'Bahan masakan',
+          //     border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.all(Radius.circular(15))),
+          //   ),
+          // ),
+          // const SizedBox(height: 20.0),
+          // Center(
+          //   child: CircleAvatar(
+          //     backgroundColor: const Color(0xffC21010),
+          //     child: IconButton(
+          //       color: Colors.white,
+          //       onPressed: () {
+          //         setState(() {
+          //           textController.text = "Teks ${++textCount}";
+          //         });
+          //       },
+          //       icon: const Icon(Icons.add),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

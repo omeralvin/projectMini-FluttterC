@@ -15,10 +15,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final foodItem = Provider.of<FoodItem>(context);
-
+    // final foodItem = Provider.of<FoodItem>(context);
     return Scaffold(
       body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.only(
           left: 20.0,
           right: 20.0,
@@ -99,26 +99,92 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: const Color(0xffC21010),
               ),
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemCount: foodItem.food.length,
-              itemBuilder: (context, index) {
-                return CardFood(
-                  title: foodItem.food[index].title,
-                  image: foodItem.food[index].image,
-                  timeCook: foodItem.food[index].cookTime,
-                );
+            Consumer<FoodItem>(
+              builder: (context, value, child) {
+                if (value.fooditem.isNotEmpty) {
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: value.fooditem.length,
+                    itemBuilder: (context, index) {
+                      return CardFood(
+                        id: value.fooditem[index].id,
+                        title: value.fooditem[index].title,
+                        image: value.fooditem[index].image,
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: Text(
+                        "belum simpan apa-apa nih?!"), // Wrap Text widget with a parent widget
+                  );
+                }
               },
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+// SafeArea(
+            //   child: Consumer<FoodItem>(
+            //     builder: (context, value, child) {
+            //       if (value.fooditem.isNotEmpty) {
+            //         return GridView.builder(
+            //           gridDelegate:
+            //               const SliverGridDelegateWithFixedCrossAxisCount(
+            //             crossAxisCount: 2,
+            //             crossAxisSpacing: 8,
+            //             mainAxisSpacing: 8,
+            //           ),
+            //           itemCount: value.fooditem.length,
+            //           itemBuilder: (context, index) {
+            //             return CardFood(
+            //               id: value.fooditem[index].id,
+            //               title: value.fooditem[index].title,
+            //               image: value.fooditem[index].image,
+            //               // timeCook: value.fooditem[index].cookTime,
+            //             );
+            //           },
+            //         );
+            //       } else {
+            //         return Center(
+            //           child: Column(
+            //             children: [
+            //               Image.asset(
+            //                 'assets/images/eat.png',
+            //                 scale: 3.0,
+            //               ),
+            //               Expanded(
+            //                 child: Column(
+            //                   children: [
+            //                     Text(
+            //                       "Ooppss, ",
+            //                       style: GoogleFonts.poppins(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.black,
+            //                         fontSize: 36,
+            //                       ),
+            //                     ),
+            //                     Text(
+            //                       "Kamu belum menyimpan apa-apa nih!",
+            //                       style: GoogleFonts.poppins(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.black,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         );
+            //       }
+            //     },
+            //   ),
+            // ),

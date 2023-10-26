@@ -49,7 +49,7 @@ class RegisScreen extends StatelessWidget {
                   focusedBorder: focusBorder(),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               TextField(
                 controller: userController,
                 decoration: InputDecoration(
@@ -59,7 +59,7 @@ class RegisScreen extends StatelessWidget {
                   focusedBorder: focusBorder(),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               TextField(
                 controller: passController,
                 decoration: InputDecoration(
@@ -69,7 +69,7 @@ class RegisScreen extends StatelessWidget {
                   focusedBorder: focusBorder(),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               SizedBox(
                 width: double.infinity,
                 height: 50,

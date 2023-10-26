@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => FoodItem(),
+          create: (context) => FoodItem(),
         )
       ],
       child: const MaterialApp(

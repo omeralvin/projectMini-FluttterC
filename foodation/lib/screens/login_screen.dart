@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/screens/regis_screen.dart';
 import 'package:foodation/widget/btm_navigation.dart';
+import 'package:foodation/widget/recipe_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -50,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                   focusedBorder: focusBorder(),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               TextField(
                 controller: passController,
                 decoration: InputDecoration(
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                   focusedBorder: focusBorder(),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -76,6 +77,10 @@ class LoginScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const BottomNavigation(),
+                        // builder: (context) => const CardFood(
+                        //     title: 'aku',
+                        //     image: 'assets/images/omelette.png',
+                        //     id: 1)),
                       ),
                     );
                   },

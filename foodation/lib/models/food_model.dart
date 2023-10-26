@@ -1,29 +1,29 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Food {
+  final int id;
   final String title;
   final String image;
-  final String cookTime;
+
   Food({
+    required this.id,
     required this.title,
     required this.image,
-    required this.cookTime,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'title': title,
       'image': image,
-      'cookTime': cookTime,
     };
   }
 
   factory Food.fromMap(Map<String, dynamic> map) {
     return Food(
+      id: map['id'] as int,
       title: map['title'] as String,
       image: map['image'] as String,
-      cookTime: map['cookTime'] as String,
     );
   }
 
