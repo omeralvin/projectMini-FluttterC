@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/screens/regis_screen.dart';
 import 'package:foodation/widget/btm_navigation.dart';
-import 'package:foodation/widget/recipe_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
