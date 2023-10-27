@@ -1,28 +1,85 @@
 import 'package:dio/dio.dart';
 import 'package:foodation/models/food_model.dart';
 
-var dio = Dio();
+class FoodApi {
+  final Dio dio = Dio();
+  final String apiKey = 'aa473a61fc1044d5b93eed85f45e8362';
+  Future<List<Food>> getFoods(List<String> ingredients) async {
+    final response = await dio.get(
+        'https://api.spoonacular.com/recipes/findByIngredients',
+        queryParameters: {
+          'apiKey': apiKey,
+          'ingredients': ingredients.join(',')
+        });
 
-abstract class ServicesApi {
-  static Future<Food?> getFood(String ingredients) async {
-    try {
-      var response = await dio.get(
-          'https://api.spoonacular.com/recipes/findByIngredients?apiKey=aa473a61fc1044d5b93eed85f45e8362&$ingredients');
-
-      if (response.statusCode == 200) {
-        var foodData = response.data[0];
-        Food food = Food.fromJson(foodData);
-        return food;
-      } else {
-        print('Failed to load data: ${response.statusCode}');
-        return null;
-      }
-    } catch (e) {
-      print('Error: $e');
-      return null;
-    }
+    List<Food> foods = (response.data as List)
+        .map((e) => Food(
+              id: e['id'],
+              title: e['title'],
+              image: e['image'],
+            ))
+        .toList();
+    return foods;
   }
 }
+
+// final Dio dio = Dio();
+// String apiKey = 'aa473a61fc1044d5b93eed85f45e8362';
+// String url =
+//     'https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',')}&apiKey=$apiKey';
+
+// class FoodApi {
+//   final Dio _dio = Dio();
+//   final String apiKey = 'aa473a61fc1044d5b93eed85f45e8362';
+
+//   Future<List<Food>> getFoods() async {
+//     List<Food> foods = [];
+
+//     try {
+//       Response response = await _dio.get(
+//         'https://api.spoonacular.com/recipes/findByIngredients',
+//         queryParameters: {
+//           'number': 10, // Jumlah resep yang ingin Anda dapatkan
+//           'apiKey': apiKey,
+//         },
+//       );
+
+//       // Ambil data dari response dan konversi menjadi objek Food
+//       List<dynamic> FoodData = response.data['Foods'];
+//       foods = FoodData.map((json) => Food(
+//             id: json['id'],
+//             title: json['title'],
+//             image: json['image'],
+//           )).toList();
+//     } catch (error) {
+//       print('Error: $error');
+//     }
+
+//     return foods;
+//   }
+// }
+
+
+// abstract class ServicesApi {
+//   static Future<Food?> getFood(String ingredients) async {
+//     try {
+//       var response = await dio.get(
+//           'https://api.spoonacular.com/recipes/findByIngredients?apiKey=aa473a61fc1044d5b93eed85f45e8362&$ingredients');
+
+//       if (response.statusCode == 200) {
+//         var foodData = response.data[ingredients];
+//         Food food = Food.fromJson(foodData);
+//         return food;
+//       } else {
+//         print('Failed to load data: ${response.statusCode}');
+//         return null;
+//       }
+//     } catch (e) {
+//       print('Error: $e');
+//       return null;
+//     }
+//   }
+// }
 
     // String url = 'https://api.spoonacular.com/recipes/findByIngredients?';
     // var apiKey = 'aa473a61fc1044d5b93eed85f45e8362';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/screens/home_screen.dart';
 import 'package:foodation/screens/info_screen.dart';
-import 'package:foodation/screens/masak_screen.dart';
+import 'package:foodation/screens/cook_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -47,7 +47,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         Container(
           alignment: Alignment.center,
-          child: const MasakScreen(),
+          child: const CookScreen(),
         ),
         Container(
           alignment: Alignment.center,
