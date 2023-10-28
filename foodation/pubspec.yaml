@@ -12,8 +12,11 @@ dependencies:
   google_fonts: ^6.1.0
   google_nav_bar: ^5.0.6
   provider:
-  http:
   dio:
+  sqflite: ^2.3.0
+  path_provider:
+  path:
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

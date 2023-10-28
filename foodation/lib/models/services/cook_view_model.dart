@@ -21,7 +21,6 @@ class FoodViewModel extends ChangeNotifier {
         List<dynamic> data = response.data;
         foods = data.map((json) => Food.fromJson(json)).toList();
         notifyListeners();
-        // return foods; // Mengembalikan list makanan setelah mendapatkan data.
       }
       return foods;
     } catch (error) {
@@ -30,14 +29,3 @@ class FoodViewModel extends ChangeNotifier {
     }
   }
 }
-// class FoodViewModel extends ChangeNotifier {
-//   List<Food> _foods = [];
-//   List<Food> get foods => _foods;
-
-//   // Metode untuk mendapatkan makanan berdasarkan daftar bahan
-//   getFoodsByIngredients(List<String> ingredients) async {
-//     final f = await FoodApi().getFoods(ingredients);
-//     _foods = f;
-//     notifyListeners();
-//   }
-// }

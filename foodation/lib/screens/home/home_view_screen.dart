@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/food_model.dart';
+import '../../models/food_model.dart';
 
 class FoodItem extends ChangeNotifier {
   // List<Food> food = [];

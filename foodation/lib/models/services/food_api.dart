@@ -22,6 +22,17 @@ class FoodApi {
     return foods;
   }
 }
+// class FoodViewModel extends ChangeNotifier {
+//   List<Food> _foods = [];
+//   List<Food> get foods => _foods;
+
+//   // Metode untuk mendapatkan makanan berdasarkan daftar bahan
+//   getFoodsByIngredients(List<String> ingredients) async {
+//     final f = await FoodApi().getFoods(ingredients);
+//     _foods = f;
+//     notifyListeners();
+//   }
+// }
 
 // final Dio dio = Dio();
 // String apiKey = 'aa473a61fc1044d5b93eed85f45e8362';

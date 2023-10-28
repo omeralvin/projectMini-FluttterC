@@ -17,7 +17,6 @@ class _CookScreenState extends State<CookScreen> {
   @override
   Widget build(BuildContext context) {
     var foodProvider = Provider.of<FoodViewModel>(context);
-
     return Scaffold(
       body: ListView(
         children: [
