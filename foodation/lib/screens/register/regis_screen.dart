@@ -171,12 +171,7 @@ class _RegisScreenState extends State<RegisScreen> {
                     ),
                     onPressed: () {
                       if (formkey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ),
-                        );
+                        signUp();
                       }
                     },
                     child: Text(

@@ -1,9 +1,12 @@
 // ignore_for_file: dead_code
 
 import 'package:flutter/material.dart';
+import 'package:foodation/database/DBHelper.dart';
+import 'package:foodation/models/user_model.dart';
 import 'package:foodation/screens/register/regis_screen.dart';
 import 'package:foodation/widget/btm_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,12 +18,88 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    Future<SharedPreferences> _pref = SharedPreferences.getInstance();
+
     TextEditingController userController = TextEditingController();
     TextEditingController passController = TextEditingController();
 
     bool isVisible = false;
 
     final formkey = GlobalKey<FormState>();
+
+    @override
+    initState() {
+      super.initState();
+      DbHelper();
+    }
+
+    Future setSP(UserModel user) async {
+      SharedPreferences prefs = await _pref;
+
+      prefs.setInt("id", user.id);
+      prefs.setString("name", user.name);
+      prefs.setString("username", user.username);
+      prefs.setString("password", user.password);
+    }
+
+    Login() async {
+      String user = userController.text;
+      String pass = passController.text;
+
+      if (user.isNotEmpty && pass.isNotEmpty) {
+        // Memeriksa login di database menggunakan DbHelper().getLoginUser
+        await DbHelper().getLoginUser(user, pass).then((value) {
+          if (value != null) {
+            // Jika pengguna ditemukan di database
+            setSP(value).whenComplete(() {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => BottomNavigation()),
+                (Route<dynamic> route) => false,
+              );
+            });
+          } else {
+            // Jika pengguna tidak ditemukan di database
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Login Gagal"),
+                  content: Text("Username atau Password salah."),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("OK"),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        });
+      } else {
+        // Jika username atau password kosong
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Login Gagal"),
+              content: const Text("Username dan Password harus diisi."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -115,12 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () {
                       if (formkey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BottomNavigation(),
-                          ),
-                        );
+                        Login();
                       }
                     },
                     child: Text(
