@@ -28,7 +28,7 @@ class _RegisScreenState extends State<RegisScreen> {
     }
 
     signUp() async {
-      int uid = 1;
+      int uid = 0;
       String uname = nameController.text;
       String uuser = userController.text;
       String upass = passController.text;

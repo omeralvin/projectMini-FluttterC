@@ -11,10 +11,10 @@ class DbHelper {
   static const String tableUser = 'user';
   static const int version = 1;
 
-  static const String cUserID = 'id';
-  static const String cName = 'name';
-  static const String cUserName = 'username';
-  static const String cPassword = 'password';
+  static const String cid = 'id';
+  static const String cname = 'name';
+  static const String cusername = 'username';
+  static const String cpassword = 'password';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -34,10 +34,10 @@ class DbHelper {
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
     CREATE TABLE $tableUser (
-      $cUserID INTEGER PRIMARY KEY AUTOINCREMENT,
-      $cName TEXT,
-      $cUserName TEXT,
-      $cPassword TEXT
+      $cid INTEGER PRIMARY KEY AUTOINCREMENT,
+      $cname TEXT,
+      $cusername TEXT,
+      $cpassword TEXT
     )
   ''');
   }
@@ -48,11 +48,11 @@ class DbHelper {
     return res;
   }
 
-  Future<UserModel?> getLoginUser(String userId, String password) async {
+  Future<UserModel?> getLoginUser(String username, String password) async {
     var dbClient = await db;
     var res = await dbClient.rawQuery(
-        "SELECT * FROM $tableUser WHERE $cUserName = ? AND $cPassword = ?",
-        [userId, password]);
+        "SELECT * FROM $tableUser WHERE $cusername = ? AND $cpassword = ?",
+        [username, password]);
 
     if (res.isNotEmpty) {
       return UserModel.fromMap(res.first);
