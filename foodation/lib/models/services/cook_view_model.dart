@@ -16,16 +16,20 @@ class FoodViewModel extends ChangeNotifier {
   Future<List<Food>> getRecipesByIngredients(List<String> ingredients) async {
     _isLoading = true;
     notifyListeners();
-
+    print(apiKey);
+    print(ingredients);
+    print(ingredients.join(','));
     try {
       Response response = await dio.get(apiUrl, queryParameters: {
         'apiKey': apiKey,
         'ingredients': ingredients.join(','),
       });
-
+      print(response.data);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         foods = data.map((json) => Food.fromJson(json)).toList();
+        print(foods);
         notifyListeners();
       }
       _isLoading = false;

@@ -10,9 +10,24 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Hallo ini info page"),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 250,
+                  color: const Color(0xffC21010),
+                ),
+                // CircleAvatar(
+                //   child: ,
+                // )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

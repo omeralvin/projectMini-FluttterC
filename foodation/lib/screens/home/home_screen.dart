@@ -110,6 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: value.fooditem.length,
                       itemBuilder: (context, index) {
                         return CardFood(
+                          isNetwork: false,
                           id: value.fooditem[index].id,
                           title: value.fooditem[index].title,
                           image: value.fooditem[index].image,

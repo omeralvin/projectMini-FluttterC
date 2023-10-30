@@ -7,11 +7,14 @@ class CardFood extends StatelessWidget {
   final String image;
   final int id;
 
+  final bool isNetwork;
+
   const CardFood({
     Key? key,
     required this.title,
     required this.image,
     required this.id,
+    required this.isNetwork,
   }) : super(key: key);
 
   @override
@@ -33,10 +36,16 @@ class CardFood extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      image,
-                      height: 200,
-                    ),
+                    child: isNetwork
+                        ? Image.network(
+                            image,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            image,
+                            height: 200,
+                          ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

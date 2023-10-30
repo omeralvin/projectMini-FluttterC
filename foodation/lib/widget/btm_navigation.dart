@@ -37,8 +37,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
               text: 'Masak',
             ),
             GButton(
-              icon: Icons.info,
-              text: 'Search',
+              icon: Icons.person,
+              text: 'Akun',
             ),
           ],
         ),

@@ -76,36 +76,13 @@ class _CookScreenState extends State<CookScreen> {
                           ),
                         ),
                         onPressed: () async {
+                          print(foodProvider.isLoading);
                           if (foodProvider.isLoading)
-                            Center(child: CircularProgressIndicator());
+                            const Center(child: CircularProgressIndicator());
 
                           await foodProvider.getRecipesByIngredients(
                             ingredientsController.text.split(','),
                           );
-                          if (!foodProvider.isLoading &&
-                              foodProvider.foods.isNotEmpty) {
-                            GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                              ),
-                              itemCount: foodProvider.foods.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {},
-                                  child: CardFood(
-                                    id: foodProvider.foods[index].id,
-                                    title: foodProvider.foods[index].title,
-                                    image: foodProvider.foods[index].image,
-                                  ),
-                                );
-                              },
-                            );
-                          }
                         },
                         child: Text(
                           "Masak",
@@ -117,6 +94,33 @@ class _CookScreenState extends State<CookScreen> {
                         ),
                       ),
                     ),
+                    if (foodProvider.isLoading) ...[
+                      const Center(child: CircularProgressIndicator()),
+                    ],
+                    if (foodProvider.foods.isNotEmpty) ...[
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                        ),
+                        itemCount: foodProvider.foods.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {},
+                            child: CardFood(
+                              isNetwork: true,
+                              id: foodProvider.foods[index].id,
+                              title: foodProvider.foods[index].title,
+                              image: foodProvider.foods[index].image,
+                            ),
+                          );
+                        },
+                      ),
+                    ]
                   ],
                 ),
               )
