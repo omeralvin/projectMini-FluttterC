@@ -94,6 +94,7 @@ class _CookScreenState extends State<CookScreen> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 40.0),
                     if (foodProvider.isLoading) ...[
                       const Center(child: CircularProgressIndicator()),
                     ],

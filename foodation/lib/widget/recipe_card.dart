@@ -39,12 +39,15 @@ class CardFood extends StatelessWidget {
                     child: isNetwork
                         ? Image.network(
                             image,
+                            width: double.infinity,
                             height: 200,
                             fit: BoxFit.cover,
                           )
                         : Image.asset(
                             image,
+                            width: double.infinity,
                             height: 200,
+                            fit: BoxFit.cover,
                           ),
                   ),
                   Row(

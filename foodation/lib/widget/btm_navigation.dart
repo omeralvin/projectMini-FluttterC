@@ -18,6 +18,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: SingleChildScrollView(
         child: GNav(
           onTabChange: (int index) {
@@ -54,7 +55,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         Container(
           alignment: Alignment.center,
-          child: const InfoScreen(),
+          child: const ProfileScreen(),
         ),
       ][currentPageIndex],
     );
