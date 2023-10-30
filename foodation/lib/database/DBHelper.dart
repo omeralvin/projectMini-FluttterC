@@ -9,7 +9,7 @@ class DbHelper {
   static Database? _db;
   static const String dbName = 'foodation.db';
   static const String tableUser = 'user';
-  static const int version = 1;
+  static const int version = 5;
 
   static const String cid = 'id';
   static const String cname = 'name';
@@ -34,9 +34,9 @@ class DbHelper {
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
     CREATE TABLE $tableUser (
-      $cid INTEGER PRIMARY KEY AUTOINCREMENT,
-      $cname TEXT,
-      $cusername TEXT,
+     $cid INTEGER PRIMARY KEY AUTOINCREMENT,
+     $cname TEXT,
+     $cusername TEXT,
       $cpassword TEXT
     )
   ''');
@@ -45,6 +45,7 @@ class DbHelper {
   Future<int> saveData(UserModel user) async {
     var dbClient = await db;
     var res = await dbClient.insert(tableUser, user.toMap());
+    print(res);
     return res;
   }
 

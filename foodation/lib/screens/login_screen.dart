@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/database/DBHelper.dart';
 import 'package:foodation/models/user_model.dart';
-import 'package:foodation/screens/register/regis_screen.dart';
+import 'package:foodation/screens/regis_screen.dart';
 import 'package:foodation/widget/btm_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Future<SharedPreferences> _pref = SharedPreferences.getInstance();
+    // late bool newUser;
 
     TextEditingController userController = TextEditingController();
     TextEditingController passController = TextEditingController();
@@ -26,17 +27,32 @@ class _LoginScreenState extends State<LoginScreen> {
     bool isVisible = false;
 
     final formkey = GlobalKey<FormState>();
+    Future<void> _cekLoginStatus() async {
+      SharedPreferences prefs = await _pref;
+      bool isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
+
+      if (isLoggedIn) {
+        // Jika pengguna sudah login, arahkan ke layar beranda atau halaman yang sesuai
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavigation()),
+          // (Route<dynamic> route) => false,
+        );
+      }
+    }
 
     @override
-    initState() {
+    void initState() {
       super.initState();
       DbHelper();
+      _cekLoginStatus();
     }
 
     Future setSP(UserModel user) async {
       SharedPreferences prefs = await _pref;
 
-      prefs.setInt("id", user.id);
+      // prefs.setInt("id", user.id);
       prefs.setString("name", user.name);
       prefs.setString("username", user.username);
       prefs.setString("password", user.password);
@@ -52,11 +68,15 @@ class _LoginScreenState extends State<LoginScreen> {
           if (value != null) {
             // Jika pengguna ditemukan di database
             setSP(value).whenComplete(() {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => BottomNavigation()),
-                (Route<dynamic> route) => false,
-              );
+              SharedPreferences.getInstance().then((prefs) {
+                prefs.setBool('isLoggedIn', true);
+              });
+              _cekLoginStatus();
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => BottomNavigation()),
+              //   (Route<dynamic> route) => false,
+              // );
             });
           } else {
             // Jika pengguna tidak ditemukan di database
@@ -64,14 +84,25 @@ class _LoginScreenState extends State<LoginScreen> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Login Gagal"),
-                  content: Text("Username atau Password salah."),
+                  title: const Text("Login Gagal"),
+                  content: const Text("apakah kamu sudah punya akun ?."),
                   actions: [
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("OK"),
+                      child: const Text("OK"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text("Daftar"),
                     ),
                   ],
                 );
@@ -86,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text("Login Gagal"),
-              content: const Text("Username dan Password harus diisi."),
+              content: const Text("Username dan Password salah."),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -200,9 +231,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       "Masuk",
                       style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -214,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         foregroundColor: const Color(0xffC21010),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const RegisScreen(),

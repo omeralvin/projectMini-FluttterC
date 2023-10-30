@@ -23,7 +23,7 @@ class _CookScreenState extends State<CookScreen> {
           Stack(
             children: [
               Container(
-                height: 400,
+                height: 380,
                 decoration: const BoxDecoration(
                   color: Color(0XffFFF1F4),
                   borderRadius: BorderRadius.only(
@@ -36,12 +36,21 @@ class _CookScreenState extends State<CookScreen> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'assets/images/makan.png',
+                        scale: 0.1,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Text(
                       "Masak apa hari ini ?",
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.bold,
                         fontSize: 26,
-                        color: const Color(0xffC21010),
+                        // color: const Color(0xffC21010),
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -67,15 +76,43 @@ class _CookScreenState extends State<CookScreen> {
                           ),
                         ),
                         onPressed: () async {
+                          if (foodProvider.isLoading)
+                            Center(child: CircularProgressIndicator());
+
                           await foodProvider.getRecipesByIngredients(
                             ingredientsController.text.split(','),
                           );
+                          if (!foodProvider.isLoading &&
+                              foodProvider.foods.isNotEmpty) {
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                              ),
+                              itemCount: foodProvider.foods.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {},
+                                  child: CardFood(
+                                    id: foodProvider.foods[index].id,
+                                    title: foodProvider.foods[index].title,
+                                    image: foodProvider.foods[index].image,
+                                  ),
+                                );
+                              },
+                            );
+                          }
                         },
                         child: Text(
-                          "Cooking",
+                          "Masak",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -84,25 +121,6 @@ class _CookScreenState extends State<CookScreen> {
                 ),
               )
             ],
-          ),
-          Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemCount: foodProvider.foods.length,
-              itemBuilder: (context, index) {
-                return CardFood(
-                  id: foodProvider.foods[index].id,
-                  title: foodProvider.foods[index].title,
-                  image: foodProvider.foods[index].image,
-                );
-              },
-            ),
           ),
         ],
       ),

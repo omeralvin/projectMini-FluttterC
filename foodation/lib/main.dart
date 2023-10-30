@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/models/services/cook_view_model.dart';
+import 'package:foodation/widget/btm_navigation.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_view_screen.dart';
-import 'screens/login/login_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,10 +22,14 @@ class MainApp extends StatelessWidget {
           create: (context) => FoodViewModel(),
         )
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: LoginScreen(),
+        home: const Scaffold(
+          // body: LoginScreen(),
+          body: BottomNavigation(),
         ),
       ),
     );

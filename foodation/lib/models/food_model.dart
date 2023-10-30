@@ -19,7 +19,7 @@ class Food {
     };
   }
 
-  factory Food.fromMap(Map<String, dynamic> map) {
+  factory Food.fromJson(Map<String, dynamic> map) {
     return Food(
       id: map['id'] as int,
       title: map['title'] as String,
@@ -29,8 +29,8 @@ class Food {
 
   String toJson() => json.encode(toMap());
 
-  factory Food.fromJson(String source) =>
-      Food.fromMap(json.decode(source) as Map<String, dynamic>);
+  // factory Food.fromJson(String source) =>
+  //     Food.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 // class Food {

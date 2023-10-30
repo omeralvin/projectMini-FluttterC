@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodation/screens/info_screen.dart';
-import 'package:foodation/screens/cook_screen.dart';
+import 'package:foodation/screens/profile_screen.dart';
+import 'package:foodation/screens/recipe_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../screens/home/home_screen.dart';
@@ -18,28 +18,30 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: GNav(
-        onTabChange: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        activeColor: const Color(0xffC21010),
-        gap: 8,
-        tabs: const [
-          GButton(
-            icon: Icons.home_filled,
-            text: 'Beranda',
-          ),
-          GButton(
-            icon: Icons.soup_kitchen_rounded,
-            text: 'Masak',
-          ),
-          GButton(
-            icon: Icons.info,
-            text: 'Search',
-          ),
-        ],
+      bottomNavigationBar: SingleChildScrollView(
+        child: GNav(
+          onTabChange: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          activeColor: const Color(0xffC21010),
+          gap: 8,
+          tabs: const [
+            GButton(
+              icon: Icons.home_filled,
+              text: 'Beranda',
+            ),
+            GButton(
+              icon: Icons.soup_kitchen_rounded,
+              text: 'Masak',
+            ),
+            GButton(
+              icon: Icons.info,
+              text: 'Search',
+            ),
+          ],
+        ),
       ),
       body: <Widget>[
         Container(

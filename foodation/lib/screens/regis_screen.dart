@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/database/DBHelper.dart';
 import 'package:foodation/models/user_model.dart';
-import 'package:foodation/screens/login/login_screen.dart';
+import 'package:foodation/screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisScreen extends StatefulWidget {
@@ -28,7 +28,8 @@ class _RegisScreenState extends State<RegisScreen> {
     }
 
     signUp() async {
-      int uid = 0;
+      // ignore: prefer_typing_uninitialized_variables
+      // int? uid;
       String uname = nameController.text;
       String uuser = userController.text;
       String upass = passController.text;
@@ -36,7 +37,7 @@ class _RegisScreenState extends State<RegisScreen> {
         formkey.currentState!.save();
       }
 
-      UserModel uModel = UserModel(uid, uname, uuser, upass);
+      UserModel uModel = UserModel(uname, uuser, upass);
       await DbHelper().saveData(uModel).then(
             (value) => const AlertDialog(
               title: Text("Yeay!!"),
@@ -179,6 +180,7 @@ class _RegisScreenState extends State<RegisScreen> {
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
+                        color: Colors.white,
                       ),
                     ),
                   ),

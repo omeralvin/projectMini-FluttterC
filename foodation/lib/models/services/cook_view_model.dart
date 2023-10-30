@@ -9,8 +9,14 @@ class FoodViewModel extends ChangeNotifier {
   final Dio dio = Dio();
 
   List<Food> foods = [];
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
 
   Future<List<Food>> getRecipesByIngredients(List<String> ingredients) async {
+    _isLoading = true;
+    notifyListeners();
+
     try {
       Response response = await dio.get(apiUrl, queryParameters: {
         'apiKey': apiKey,
@@ -22,9 +28,13 @@ class FoodViewModel extends ChangeNotifier {
         foods = data.map((json) => Food.fromJson(json)).toList();
         notifyListeners();
       }
+      _isLoading = false;
+      notifyListeners();
       return foods;
     } catch (error) {
       print("Error: $error");
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }
