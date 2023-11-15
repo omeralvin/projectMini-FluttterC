@@ -50,9 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     Future setSP(UserModel user) async {
-      SharedPreferences prefs = await _pref;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("username", user.name);
 
-      // prefs.setInt("id", user.id);
       prefs.setString("name", user.name);
       prefs.setString("username", user.username);
       prefs.setString("password", user.password);
@@ -85,7 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text("Login Gagal"),
-                  content: const Text("apakah kamu sudah punya akun ?."),
+                  content: const Text(
+                      "username dan password salah. Apakah kamu sudah punya akun?"),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text("Login Gagal"),
-              content: const Text("Username dan Password salah."),
+              content: const Text("Username dan Password harus diisi."),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -170,12 +171,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Username belum dimasukkan nih!';
-                    }
-                    return null;
-                  },
+                  // validator: (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return 'Username belum dimasukkan nih!';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 const SizedBox(height: 15.0),
                 TextFormField(
@@ -205,12 +206,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   obscureText: !isVisible,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password belum dimasukkan nih!';
-                    }
-                    return null;
-                  },
+                  // validator: (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return 'Password belum dimasukkan nih!';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 const SizedBox(height: 15.0),
                 SizedBox(

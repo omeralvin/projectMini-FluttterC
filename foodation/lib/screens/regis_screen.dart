@@ -28,32 +28,70 @@ class _RegisScreenState extends State<RegisScreen> {
     }
 
     signUp() async {
-      // ignore: prefer_typing_uninitialized_variables
-      // int? uid;
       String uname = nameController.text;
       String uuser = userController.text;
       String upass = passController.text;
+
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
       }
 
       UserModel uModel = UserModel(uname, uuser, upass);
-      await DbHelper().saveData(uModel).then(
-            (value) => const AlertDialog(
+
+      try {
+        await DbHelper().saveData(uModel);
+
+        // ignore: use_build_context_synchronously
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
               title: Text("Yeay!!"),
               content: Text("Berhasil didaftarkan!"),
-            ),
-          );
+            );
+          },
+        );
 
-      Future.delayed(const Duration(seconds: 2), () {
+        await Future.delayed(const Duration(seconds: 2));
+
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const LoginScreen(),
           ),
         );
-      });
+      } catch (e) {
+        print("Error saving data: $e");
+      }
     }
+
+    // signUp() async {
+    //   // ignore: prefer_typing_uninitialized_variables
+    //   // int? uid;
+    //   String uname = nameController.text;
+    //   String uuser = userController.text;
+    //   String upass = passController.text;
+    //   if (formkey.currentState!.validate()) {
+    //     formkey.currentState!.save();
+    //   }
+
+    //   UserModel uModel = UserModel(uname, uuser, upass);
+    //   await DbHelper().saveData(uModel);
+    //   const AlertDialog(
+    //     title: Text("Yeay!!"),
+    //     content: Text("Berhasil didaftarkan!"),
+    //   );
+
+    //   Future.delayed(const Duration(seconds: 2), () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (_) => const LoginScreen(),
+    //       ),
+    //     );
+    //   });
+    // }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -185,6 +223,7 @@ class _RegisScreenState extends State<RegisScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 15.0),
                 Row(
                   children: [
                     const Text("Sudah punya akun?"),

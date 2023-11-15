@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodation/models/services/cook_view_model.dart';
 import 'package:foodation/screens/login_screen.dart';
+import 'package:foodation/widget/btm_navigation.dart';
 // import 'package:foodation/widget/btm_navigation.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_view_screen.dart';
@@ -29,8 +30,8 @@ class MainApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: const Scaffold(
-          body: LoginScreen(),
-          // body: BottomNavigation(),
+          // body: LoginScreen(),
+          body: BottomNavigation(),
         ),
       ),
     );

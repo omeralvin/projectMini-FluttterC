@@ -94,9 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 "Laman Tersimpan",
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18,
                   color: const Color(0xffC21010),
                 ),
               ),
+              const SizedBox(height: 20.0),
               Consumer<FoodItem>(
                 builder: (context, value, child) {
                   if (value.fooditem.isNotEmpty) {
