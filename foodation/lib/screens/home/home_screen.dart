@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../widget/recipe_card.dart';
+import '../recipe_detail_screen.dart';
 import 'home_view_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -111,11 +112,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       itemCount: value.fooditem.length,
                       itemBuilder: (context, index) {
-                        return CardFood(
-                          isNetwork: false,
-                          id: value.fooditem[index].id,
-                          title: value.fooditem[index].title,
-                          image: value.fooditem[index].image,
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pop(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RecipeDetail(),
+                              ),
+                            );
+                          },
+                          child: CardFood(
+                            isNetwork: false,
+                            id: value.fooditem[index].id,
+                            title: value.fooditem[index].title,
+                            image: value.fooditem[index].image,
+                          ),
                         );
                       },
                     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodation/screens/recipe_detail_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../widget/recipe_card.dart';
@@ -111,7 +112,14 @@ class _CookScreenState extends State<CookScreen> {
                         itemCount: foodProvider.foods.length,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RecipeDetail(),
+                                ),
+                              );
+                            },
                             child: CardFood(
                               isNetwork: true,
                               id: foodProvider.foods[index].id,

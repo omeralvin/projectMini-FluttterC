@@ -1,75 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class FoodDetail extends StatelessWidget {
-  const FoodDetail({super.key});
+class RecipeDetail extends StatelessWidget {
+  const RecipeDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        'https://picsum.photos/seed/610/690',
-                        width: double.infinity,
-                        height: 300,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'Coding bootcamp pernghasil Programmer dengan kualitas tinggi di indonesia',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const Text(
-                              'Alterra Academy adalah cooding bootcamp indonesia untuk semua orang, baik dengan background IT & non-IT unutk menjadi programmer dengan kualitas terbaik di industri saat ini.',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                            const SizedBox(height: 10.0),
-                            ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Pelajari Lebih Lanjut"))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 250.0,
-                  margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    // image: DecorationImage(
-                    //   image: AssetImage(),
-                    // ),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  child: Image.network(
+                    'https://picsum.photos/seed/610/690',
+                    width: double.infinity,
+                    height: 350,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const Text('The Paragraf'),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.4),
+                          Colors.transparent,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      "Karage",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 32,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-          )
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Bahan Masakan',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Cara Masak',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
