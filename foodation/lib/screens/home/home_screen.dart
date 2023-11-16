@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pop(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RecipeDetail(),
+                                builder: (context) => const RecipeDetail(),
                               ),
                             );
                           },

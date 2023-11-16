@@ -23,7 +23,7 @@ class CardFood extends StatelessWidget {
       onTap: () {},
       child: Card(
         // clipBehavior: Clip.antiAliasWithSaveLayer,
-        elevation: 2,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -120,4 +120,3 @@ class CardFood extends StatelessWidget {
     );
   }
 }
-

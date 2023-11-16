@@ -116,7 +116,7 @@ class _CookScreenState extends State<CookScreen> {
                               Navigator.pop(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RecipeDetail(),
+                                  builder: (context) => const RecipeDetail(),
                                 ),
                               );
                             },
@@ -129,6 +129,17 @@ class _CookScreenState extends State<CookScreen> {
                           );
                         },
                       ),
+                    ] else ...[
+                      Center(
+                        child: Text(
+                          "Hhmm belum ada nih !",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      )
                     ]
                   ],
                 ),
